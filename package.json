@@ -1,0 +1,24 @@
+{
+  "name": "modularni-urad-optionman-webclient",
+  "title": "Option manager webclient",
+  "description": "web based",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=debug node -r esm --inspect dev/server.js"
+  },
+  "author": {
+    "name": "Vaclav Klecanda <vencax77@gmail.com>"
+  },
+  "license": "BSD",
+  "devDependencies": {
+    "bootstrap-vue-dynamic-form": "github:vencax/bootstrap-vue-dynamic-form",
+    "browser-sync": "^2.26.14",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "knex": "^0.21.16",
+    "modularni-urad-admin-components": "github:modularni-urad/admin-components",
+    "modularni-urad-optionman": "github:modularni-urad/optionman",
+    "sqlite3": "^4.2.0"
+  }
+}
