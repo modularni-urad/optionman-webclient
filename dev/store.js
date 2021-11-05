@@ -1,16 +1,19 @@
 /* global Vue, Vuex, localStorage, API, axios, _ */
 
 const KEY = '_opencomm_user_'
-const savedUser = localStorage.getItem(KEY)
-const loadedUsers = {}
 
-Vue.filter('username', function (uid) {
-  return loadedUsers[uid] || 'unknown'
-})
+function _loadUser() {
+  const u = localStorage.getItem(KEY)
+  const user = u ? JSON.parse(u) : null
+  user && axios.post('http://localhost:24000/set', { 
+    id: user.id, groups: ['admins'] 
+  })
+  return user
+}
 
 export default (router, cfg) => (new Vuex.Store({
   state: {
-    user: savedUser && JSON.parse(savedUser),
+    user: _loadUser(),
     router: router,
     cfg
   },
@@ -20,7 +23,7 @@ export default (router, cfg) => (new Vuex.Store({
     },
     UID: state => {
       const UID = state.router.currentRoute.query.uid || state.user.id
-      axios.post('http://localhost:24000/set', { id: UID })
+      axios.post('http://localhost:24000/set', { id: UID, groups: ['admins'] })
       return UID
     },
     isMember: state => group => {

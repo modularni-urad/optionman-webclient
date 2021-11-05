@@ -12,7 +12,21 @@ export async function setupRoutes (path, cfg, initConfig) {
   await initConfig(groupsCfg)
   const optionsCfg = Object.assign({}, cfg, { 
     conf: OPTION_FORM_CONFIG,
-    apiurl: cfg.url
+    apiurl: cfg.url,
+    default_sort: 'value:asc',
+    getLoadUrl: (itemId, self) => {
+      const filter = { 
+        value: self.query._detail 
+      }
+      return `${self.cfg.url}${self.$route.params.id}?filter=${JSON.stringify(filter)}`
+    },
+    getListUrl: (self) => {
+      return `${self.cfg.url}${self.$route.params.id}`
+    },
+    getSaveUrl: (currItem, self) => {
+      const u = `${self.cfg.url}${self.$route.params.id}`
+      return currItem ? `${u}/${self.query._detail}` : u
+    }
   })
   await initConfig(optionsCfg)
 

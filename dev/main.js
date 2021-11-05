@@ -24,7 +24,7 @@ VeeValidate.extend(WITHOUT_DIACRITICS_VALIDATOR_NAME, WITHOUT_DIACRITICS_VALIDAT
 async function doInit () {
   const cfg = { 
     url: '/api/',
-    listViewName: 'ukoly'
+    listViewName: 'options'
   }
 
   const router = new VueRouter({

@@ -1,10 +1,11 @@
+import store from '../../dev/store.js'
 import { ROUTE_NAMES } from '../consts.js'
 
 export default {
   props: ['query', 'cfg', 'row'],
   computed: {
     muzuUpravit: function () {
-      return true
+      return this.$store.getters.isMember(this.row.group)
     }
   },
   methods: {

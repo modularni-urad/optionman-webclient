@@ -1,17 +1,17 @@
 
 export default {
   props: ['query', 'id', 'cfg'],
-  created() {
-    this.cfg.url = this.cfg.apiurl + this.id
-  },
+  // created() {
+  //   this.cfg.url = this.cfg.apiurl + this.id
+  // },
   computed: {
     muzuUpravit: function () {
       return true
     }
   },
   methods: {
-    doEdit: function () {
-      const query = Object.assign({}, this.query, { _detail: this.row.id })
+    doEdit: function (row) {
+      const query = Object.assign({}, this.query, { _detail: row.value })
       this.$router.replace({ query })
     }
   },
@@ -26,7 +26,6 @@ export default {
     <template v-slot:tbody="{ items, fields }">
 
       <tr v-for="row,rowidx in items" :key="rowidx">
-        <td>{{ row.id }}</td>
         <td>{{ row.value }}</td>
         <td>{{ row.label }}</td>
         <td>{{ row.note }}</td>

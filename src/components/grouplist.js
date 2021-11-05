@@ -10,7 +10,7 @@ export default {
       <tr v-for="row,rowidx in items" :key="rowidx">
         <td>{{ row.id }}</td>
         <td>{{ row.name }}</td>
-        <td>{{ row.group }}</td>
+        <td>{{ row.owner }}</td>
         <Actions key="actions" :query="query" :row="row" :cfg="cfg" />
       </tr>
 
