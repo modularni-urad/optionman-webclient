@@ -1,0 +1,4 @@
+apps:
+  - module: ./index.js
+    url: '/api/'
+    listViewName: 'options'

@@ -1,7 +1,6 @@
 /* global Vue, VueMarkdown */
 import './vuecustoms.js'
 import Store from './store.js'
-import {setupRoutes} from './index.js'
 import ListView from './node_modules/modularni-urad-admin-components/entity/list.js'
 import ItemForm from './node_modules/modularni-urad-admin-components/entity/form.js'
 import { initConfig } from './node_modules/modularni-urad-admin-components/entity/utils.js'
@@ -22,13 +21,17 @@ VeeValidate.extend('required', VeeValidateRules.required)
 VeeValidate.extend(WITHOUT_DIACRITICS_VALIDATOR_NAME, WITHOUT_DIACRITICS_VALIDATOR)
 
 async function doInit () {
-  const cfg = { 
-    url: '/api/',
-    listViewName: 'options'
-  }
+  const req = await axios('settings.yaml')
+  const settings = jsyaml.load(req.data)
+  const routes = []
+
+  const apps = await Promise.all(_.map(settings.apps, async appcfg => {
+    const mod = await import(appcfg.module)
+    mod.setupRoutes(routes, '/', appcfg, initConfig)
+  }))
 
   const router = new VueRouter({
-    routes: await setupRoutes('/', cfg, initConfig)
+    routes: routes
   })
   const store = Store(router)
 

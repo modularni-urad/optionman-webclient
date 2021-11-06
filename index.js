@@ -7,7 +7,7 @@ export function createMenu (user) {
   return { label: 'options', to: { name: NAMES.grouplist } }
 }
 
-export async function setupRoutes (path, cfg, initConfig) {
+export async function setupRoutes (routes, path, cfg, initConfig) {
   const groupsCfg = Object.assign(cfg, { conf: GROUP_FORM_CONFIG })
   await initConfig(groupsCfg)
   const optionsCfg = Object.assign({}, cfg, { 
@@ -30,21 +30,22 @@ export async function setupRoutes (path, cfg, initConfig) {
   })
   await initConfig(optionsCfg)
 
-  return [{ 
+  routes.push({ 
     path, 
     name: NAMES.grouplist, 
     component: GroupListComponent, 
     props: route => {
       return { query: route.query, cfg: groupsCfg }
     }
-  }, { 
+  })
+  routes.push({ 
     path: `${path}:id`, 
     name: NAMES.optionlist, 
     component: OptionListComponent, 
     props: route => {
       return { query: route.query, id: route.params.id, cfg: optionsCfg }
     }
-  }]
+  })
 }
 
 export const List = GroupListComponent
