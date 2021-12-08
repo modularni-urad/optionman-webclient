@@ -4,7 +4,7 @@ import { ROUTE_NAMES as NAMES } from './src/consts.js'
 import { GROUP_FORM_CONFIG, OPTION_FORM_CONFIG } from './src/formconfig.js'
 
 export function createMenu (user) {
-  return user.groups.indexOf('options_admins') >= 0
+  return user.groups.indexOf('option_admins') >= 0
     ? { label: 'options', to: { name: NAMES.grouplist } }
     : null
 }
