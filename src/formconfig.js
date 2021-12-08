@@ -1,7 +1,9 @@
 export const GROUP_FORM_CONFIG = [{
-  name: 'id',
-  fieldcomponent: true,
-  sortable: true
+  name: 'slug',
+  component: "dyn-input",
+  label: "slug",
+  rules: "required",
+  fieldcomponent: true, sortable: true
 }, {
   name: 'name',
   component: "dyn-input",
@@ -11,7 +13,8 @@ export const GROUP_FORM_CONFIG = [{
 }, {
   name: "owner",
   component: "dyn-select",
-  options: [{ value: 'admins', label: 'adminove' }],
+  options: null,
+  attrmap: { text: 'name', value: 'slug' },
   label: "vlastník",
   fieldcomponent: true, sortable: true
 }]

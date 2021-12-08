@@ -10,8 +10,19 @@ export function createMenu (user) {
 }
 
 export async function setupRoutes (routes, path, cfg, initConfig) {
-  const groupsCfg = Object.assign(cfg, { conf: GROUP_FORM_CONFIG })
+  const groupsCfg = Object.assign(cfg, { 
+    conf: GROUP_FORM_CONFIG,
+    default_sort: 'slug:asc',
+    getLoadUrl: (itemId, self) => {
+      const filter = { 
+        slug: self.query._detail 
+      }
+      return `${self.cfg.url}?filter=${JSON.stringify(filter)}`
+    },
+  })
+  groupsCfg.conf[2].options = cfg.group_options_url
   await initConfig(groupsCfg)
+
   const optionsCfg = Object.assign({}, cfg, { 
     conf: OPTION_FORM_CONFIG,
     apiurl: cfg.url,
@@ -20,13 +31,13 @@ export async function setupRoutes (routes, path, cfg, initConfig) {
       const filter = { 
         value: self.query._detail 
       }
-      return `${self.cfg.url}${self.$route.params.id}?filter=${JSON.stringify(filter)}`
+      return `${self.cfg.url}/${self.$route.params.id}?filter=${JSON.stringify(filter)}`
     },
     getListUrl: (self) => {
-      return `${self.cfg.url}${self.$route.params.id}`
+      return `${self.cfg.url}/${self.$route.params.id}`
     },
     getSaveUrl: (currItem, self) => {
-      const u = `${self.cfg.url}${self.$route.params.id}`
+      const u = `${self.cfg.url}/${self.$route.params.id}`
       return currItem ? `${u}/${self.query._detail}` : u
     }
   })

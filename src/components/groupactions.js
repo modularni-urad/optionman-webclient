@@ -5,16 +5,16 @@ export default {
   props: ['query', 'cfg', 'row'],
   computed: {
     muzuUpravit: function () {
-      return this.$store.getters.isMember(this.row.group)
+      return this.$store.getters.isMember(this.row.owner)
     }
   },
   methods: {
     doEdit: function () {
-      const query = Object.assign({}, this.query, { _detail: this.row.id })
+      const query = Object.assign({}, this.query, { _detail: this.row.slug })
       this.$router.replace({ query })
     },
     showDetail: function (i) {
-      this.$router.push({ name: ROUTE_NAMES.optionlist, params: { id: i.id } })
+      this.$router.push({ name: ROUTE_NAMES.optionlist, params: { id: i.slug } })
     }
   },
   template: `
