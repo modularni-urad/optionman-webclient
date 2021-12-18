@@ -27,7 +27,7 @@ export default {
 
       <tr v-for="row,rowidx in items" :key="rowidx">
         <td>{{ row.value }}</td>
-        <td>{{ row.label }}</td>
+        <td>{{ row.text }}</td>
         <td>{{ row.note }}</td>
         <td>
           <b-button v-if="muzuUpravit" size="sm" variant="primary" @click="doEdit(row)">

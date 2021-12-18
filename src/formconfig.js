@@ -26,9 +26,9 @@ export const OPTION_FORM_CONFIG = [{
   rules: "required",
   fieldcomponent: true, sortable: true
 }, {
-  name: 'label',
+  name: 'text',
   component: "dyn-input",
-  label: "název",
+  label: "text",
   rules: "required",
   fieldcomponent: true, sortable: true
 }, {
